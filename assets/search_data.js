@@ -1,0 +1,1 @@
+window.searchData = [{"t":"Envirofig","p":"classes/Envirofig.html"},{"t":"@init","h":"Envirofig","p":"classes/Envirofig.html#init-class"},{"t":"README.md","p":"README.md.html"},{"t":"LICENSE","p":"LICENSE.html"}]
