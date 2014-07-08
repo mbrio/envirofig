@@ -1,5 +1,5 @@
 should = require 'should'
-Envirofig = require('../src/envirofig')
+Envirofig = require('../../lib/envirofig')
 
 projectName = 'envirofig-test'
 
@@ -11,6 +11,10 @@ describe 'Envirofig', ->
         cwd: __dirname
 
       config.server.port.should.equal 3500
+
+    it 'should error if no namespace is passed', ->
+      throwError = -> Envirofig.init()
+      throwError.should.throw()
 
     it 'should return no environment overrides when one is not found', ->
       config = Envirofig.init {

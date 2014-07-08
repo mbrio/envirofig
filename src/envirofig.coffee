@@ -53,11 +53,20 @@ class Envirofig
   # ```
   #
   # Returns an {Object} containing the values from the merged confurg file
-  @init: (config = {}, defaults = {}) ->
+  init: (config = {}, defaults = {}) ->
     defaults.environment = (defaults.environment or process.env.NODE_ENV or
       'development').toLowerCase()
 
     conf = confurg.init.apply null, arguments
-    _.merge conf, conf.environments[defaults.environment] if conf.environments?
+
+    if conf.environments?
+      _.merge conf, conf.environments[defaults.environment]
+    else
+      conf
+
+  # Public: Creates an {Envirofig} instance and calles init
+  @init: ->
+    env = new Envirofig
+    env.init.apply env, arguments
 
 exports = module.exports = Envirofig
