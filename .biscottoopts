@@ -1,0 +1,7 @@
+--name Envirofig
+--readme README.md
+--title Envirofig Documentation
+--private
+--internal
+./src
+LICENSE
