@@ -66,7 +66,7 @@ class Envirofig
 
   # Public: Creates an {Envirofig} instance and calles init
   @init: ->
-    env = new Envirofig
+    env = new Envirofig()
     env.init.apply env, arguments
 
 exports = module.exports = Envirofig
