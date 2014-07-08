@@ -1,5 +1,5 @@
 {
-  "name": "envirofig",
+  "name": "Envirofig",
   "version": "0.1.0",
   "description": "Coffeescript and Javascript configuration loader with knowledge of it's environment",
   "main": "lib/envirofig.js",
