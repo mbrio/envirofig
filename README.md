@@ -1,5 +1,9 @@
 # Envirofig
 
+[![Build Status](https://travis-ci.org/mbrio/envirofig.svg?branch=master)](https://travis-ci.org/mbrio/envirofig) [![Dependency Status](https://gemnasium.com/mbrio/envirofig.svg)](https://gemnasium.com/mbrio/envirofig) [![Code Climate](https://codeclimate.com/github/mbrio/envirofig/coverage.png)](https://codeclimate.com/github/mbrio/envirofig)
+
+[![NPM Status](https://nodei.co/npm/envirofig.png?downloads=true)](https://npmjs.org/package/envirofig)
+
 Coffeescript and Javascript configuration loader with knowledge of it's
 environment
 
