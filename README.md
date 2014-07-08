@@ -1,6 +1,7 @@
 # Envirofig
 
-Coffeescript and Javascript configuration loader with knowledge of it's environment
+Coffeescript and Javascript configuration loader with knowledge of it's
+environment
 
 ## Installation
 
