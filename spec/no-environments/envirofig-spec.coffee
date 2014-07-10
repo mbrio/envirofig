@@ -1,4 +1,4 @@
-should = require 'should'
+expect = require('chai').expect
 Envirofig = require('../../lib/envirofig')
 
 projectName = 'envirofig-test'
@@ -13,4 +13,4 @@ describe 'Envirofig', ->
         environment: 'not-development'
       }
 
-      config.server.port.should.equal 3000
+      expect(config.server.port).to.equal 3000

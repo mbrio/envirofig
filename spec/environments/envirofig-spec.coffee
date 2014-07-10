@@ -1,4 +1,4 @@
-should = require 'should'
+expect = require('chai').expect
 Envirofig = require('../../lib/envirofig')
 
 projectName = 'envirofig-test'
@@ -10,11 +10,11 @@ describe 'Envirofig', ->
         namespace: projectName
         cwd: __dirname
 
-      config.server.port.should.equal 3500
+      expect(config.server.port).to.equal 3500
 
     it 'should error if no namespace is passed', ->
       throwError = -> Envirofig.init()
-      throwError.should.throw()
+      expect(throwError).to.throw()
 
     it 'should return no environment overrides when one is not found', ->
       config = Envirofig.init {
@@ -24,7 +24,7 @@ describe 'Envirofig', ->
         environment: 'not-development'
       }
 
-      config.server.port.should.equal 3000
+      expect(config.server.port).to.equal 3000
 
     it 'should return environment overrides when one is found', ->
       config = Envirofig.init {
@@ -34,7 +34,7 @@ describe 'Envirofig', ->
         environment: 'production'
       }
 
-      config.server.port.should.equal 80
+      expect(config.server.port).to.equal 80
 
     it 'should add properties when environment overrides are found', ->
       config = Envirofig.init {
@@ -44,8 +44,8 @@ describe 'Envirofig', ->
         environment: 'test'
       }
 
-      config.server.port.should.equal 8080
-      config.message.should.equal 'hello'
+      expect(config.server.port).to.equal 8080
+      expect(config.message).to.equal 'hello'
 
     it 'should add properties when global environment overrides are found', ->
       process.env.NODE_ENV = 'test'
@@ -54,7 +54,7 @@ describe 'Envirofig', ->
         namespace: projectName
         cwd: __dirname
 
-      config.server.port.should.equal 8080
-      config.message.should.equal 'hello'
+      expect(config.server.port).to.equal 8080
+      expect(config.message).to.equal 'hello'
 
       delete process.env.NODE_ENV
