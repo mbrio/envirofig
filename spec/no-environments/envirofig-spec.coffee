@@ -5,12 +5,13 @@ projectName = 'envirofig-test'
 
 describe 'Envirofig', ->
   describe '#init', ->
-    it 'should return default values when environments are not found', ->
-      config = Envirofig.init {
-        namespace: projectName
-        cwd: __dirname
-      }, {
-        environment: 'not-development'
-      }
+    context 'when an environments property can not be found', ->
+      it 'should return default values', ->
+        config = Envirofig.init {
+          namespace: projectName
+          cwd: __dirname
+        }, {
+          environment: 'not-development'
+        }
 
-      expect(config.server.port).to.equal 3000
+        expect(config.server.port).to.equal 3000

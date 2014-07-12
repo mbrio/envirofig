@@ -59,6 +59,11 @@ class Envirofig
 
     conf = confurg.init.apply null, arguments
 
+    # Public: Gets the currently determined environment
+    #
+    # Returns a {String} environment name
+    conf.getEnvironment = -> defaults.environment
+
     if conf.environments?
       _.merge conf, conf.environments[defaults.environment]
     else
