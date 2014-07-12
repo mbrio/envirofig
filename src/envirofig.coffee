@@ -52,7 +52,9 @@ class Envirofig
   # # => 80
   # ```
   #
-  # Returns an {Object} containing the values from the merged confurg file
+  # Returns an {Object} containing the values from the merged confurg file with
+  # the addition of the following key:
+  #   getEnvironment: A {Function} that returns the determined environment name
   init: (config = {}, defaults = {}) ->
     defaults.environment = (defaults.environment or process.env.NODE_ENV or
       'development').toLowerCase()
