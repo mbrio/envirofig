@@ -115,7 +115,7 @@
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>Coffeescript and Javascript configuration loader with knowledge of it&#39;s environment</p>
+  <p>Coffeescript and Javascript configuration loader with support for environment based overrides.</p>
 </div>
 <div class='tags'>
 </div>
@@ -141,7 +141,7 @@
       </a>
     </span>
     <span class='desc'>
-      Initializes <a href="https://github.com/awnist/confurg">confurg</a> with an environmental parameter then looks at the resulting configuration <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> to determine if environmental configurations have been specified, if one is found matching the specified environment then it&#39;s values will be merged in.
+      Initializes <a href="https://github.com/awnist/confurg">Confurg</a>, once complete it determines the requested application environment and merges any overrides.
     </span>
   </li>
 </ul>
@@ -151,7 +151,8 @@
     <p class='signature' id='init-class'>
       .<strong>init</strong>()
       <a class='gh-link' href='https:&#47;&#47;github.com&#47;mbrio&#47;envirofig
-&#47;blob&#47;master/src&#47;envirofig.coffee#L68'>Source</a>
+&#47;blob&#47;v0.1.2
+/src&#47;envirofig.coffee#L90'>Source</a>
     </p>
     <div class='docstring'>
   <p>Creates an <a href='../classes/Envirofig.html'>Envirofig</a> instance and calles init</p>
@@ -166,32 +167,44 @@
     <p class='signature' id='init-instance'>
       Object ::<strong>init</strong>(config = {}, defaults = {})
       <a class='gh-link' href='https:&#47;&#47;github.com&#47;mbrio&#47;envirofig
-&#47;blob&#47;master/src&#47;envirofig.coffee#L56'>Source</a>
+&#47;blob&#47;v0.1.2
+/src&#47;envirofig.coffee#L70'>Source</a>
     </p>
     <div class='docstring'>
-  <p>Initializes <a href="https://github.com/awnist/confurg">confurg</a> with an environmental parameter then looks at the resulting configuration <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> to determine if environmental configurations have been specified, if one is found matching the specified environment then it&#39;s values will be merged in.</p><p>In order to determine the environment name to use envirofig first looks
-at the <code>defaults</code> argument for a property <code>environment</code>, if it does not
-exist it then looks at <code>process.env.NODE_ENV</code>, if it does not exist it
-defaults to the <em>development</em> environment. Before searching for environment
-overrides it lower-cases the environment name.</p><p>In order to find an environment override within the configuration <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a>
-envirofig looks within the <code>environments</code> property for a property that
-matches the specified environment.</p><pre><code class="lang-coffee"># Example CSON config file
+  <p>Initializes <a href="https://github.com/awnist/confurg">Confurg</a>, once complete it determines the requested application environment and merges any overrides.</p><p>In order to determine the requested application environment Envirofig first
+looks at the supplied <code>defaults</code> argument for a property named
+<code>environment</code>; if not found, it looks at <code>process.env.NODE_ENV</code>; if the
+global <code>NODE_ENV</code> variable is not set it uses the default <em>development</em>
+environment.</p><p>In order to find an environment override within the configuration <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a>
+Envirofig looks within the <code>environments</code> property for a child property that
+matches the specified environment name. Property name matching is done
+utilizing a glob.</p><p>The application environment can be a name (e.g. test, development, or
+production) or it can be a glob, as specified above (e.g. dev*). In either
+case Envirofig uses a case-insensitive property search on the configuration
+object.</p><pre><code class="lang-coffee"># Example CSON config file
 serverPort: 3000
 environments:
+development:
+  serverPort: 8080
+  debug: true
 production:
   serverPort: 80
 </code></pre><p>For information pertaining to configuration files see
-<a href="https://github.com/awnist/confurg">confurg</a>.</p><pre><code class="lang-coffee"># In this example we assume the environment has been set to *development*
+<a href="https://github.com/awnist/confurg">Confurg</a>.</p><pre><code class="lang-coffee"># In this example we assume the environment has been set to *development*
 # and we are using the config file above
 config = require(&#39;envirofig&#39;).init &#39;project-name&#39;
 console.log config.serverPort
-# =&gt; 3000
+# =&gt; 8080
+console.log config.debug
+# =&gt; true
 </code></pre>
 <pre><code class="lang-coffee"># In this example we assume the environment has been set to *production*
 # and we are using the config file above
 config = require(&#39;envirofig&#39;).init &#39;project-name&#39;
 console.log config.serverPort
 # =&gt; 80
+console.log config.debug
+# =&gt; undefined
 </code></pre>
 
 </div>
@@ -202,13 +215,13 @@ console.log config.serverPort
       <span class='type'>(Object)</span>
       <span class='name'>config</span>
       &mdash;
-      <span class='desc'>An <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing a configuration for confurg, see <a href="https://github.com/awnist/confurg">confurg</a></span>
+      <span class='desc'>An <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing a configuration for Confurg, see <a href="https://github.com/awnist/confurg">Confurg</a></span>
     </li>
     <li>
       <span class='type'>(Object)</span>
       <span class='name'>defaults</span>
       &mdash;
-      <span class='desc'>An <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing defaults for confurg, see <a href="https://github.com/awnist/confurg">confurg</a></span>
+      <span class='desc'>An <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing defaults for Confurg, see <a href="https://github.com/awnist/confurg">Confurg</a></span>
     </li>
   </ul>
   <h3>Returns:</h3>
@@ -217,7 +230,9 @@ console.log config.serverPort
       <span class='type'></span>
       (<tt>Object</tt>)
       &mdash;
-      <span class='desc'>Returns an <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing the values from the merged confurg file</span>
+      <span class='desc'>Returns an <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object'>Object</a> containing the values from the merged Confurg file with
+the addition of the following key:
+getEnvironment: A <a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function'>Function</a> that returns the determined environment name</span>
     </li>
   </ul>
 </div>
@@ -226,7 +241,7 @@ console.log config.serverPort
     </div>
     <div id='footer'>
   Generated on
-  Tue Jul 08 2014 16:12:28 GMT-0400 (EDT)
+  Sat Jul 12 2014 21:42:57 GMT-0400 (EDT)
   by
   <a href='https://github.com/gjtorikian/biscotto' title='TomDoc-CoffeeScript API documentation generator'>Biscotto</a>
   v2.1.4
