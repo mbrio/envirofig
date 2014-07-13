@@ -4,6 +4,8 @@ environments:
   development:
     server:
       port: 3500
+  developmentAdditions:
+    debug: true
   production:
     server:
       port: 80

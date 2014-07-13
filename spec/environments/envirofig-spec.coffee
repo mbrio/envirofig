@@ -37,7 +37,7 @@ describe 'Envirofig', ->
             namespace: projectName
             cwd: __dirname
           }, {
-            environment: 'production'
+            environment: 'Production' # case-insensitive
           }
 
           expect(config.getEnvironment()).to.equal 'production'
@@ -80,3 +80,25 @@ describe 'Envirofig', ->
         expect(config.message).to.equal 'hello'
 
         delete process.env.NODE_ENV
+
+    context 'when an environment is specified as a pattern', ->
+      it 'should return environment overrides when one is found', ->
+        config = Envirofig.init {
+          namespace: projectName
+          cwd: __dirname
+        }, {
+          environment: 'Dev*' # case-insensitive pattern
+        }
+
+        expect(config.server.port).to.equal 3500
+
+      it 'should add properties', ->
+        config = Envirofig.init {
+          namespace: projectName
+          cwd: __dirname
+        }, {
+          environment: 'Dev*' # case-insensitive pattern
+        }
+
+        expect(config.server.port).to.equal 3500
+        expect(config.debug).to.be.true

@@ -1,4 +1,5 @@
 confurg = require 'confurg'
+minimatch = require 'minimatch'
 _ = require 'lodash'
 
 # Public: Coffeescript and Javascript configuration loader with support for
@@ -16,8 +17,13 @@ class Envirofig
   #
   # In order to find an environment override within the configuration {Object}
   # Envirofig looks within the `environments` property for a child property that
-  # matches the specified environment name. Name matching is done utilizing a
-  # a glob.
+  # matches the specified environment name. Property name matching is done
+  # utilizing a glob.
+  #
+  # The application environment can be a name (e.g. test, development, or
+  # production) or it can be a glob, as specified above (e.g. dev*). In either
+  # case Envirofig uses a case-insensitive property search on the configuration
+  # object.
   #
   # ```coffee
   # # Example CSON config file
@@ -73,7 +79,10 @@ class Envirofig
     conf.getEnvironment = -> defaults.environment
 
     if conf.environments?
-      _.merge conf, conf.environments[defaults.environment]
+      props = minimatch.match Object.keys(conf.environments),
+        defaults.environment, { nonull: false, nocase: true }
+
+      _.merge conf, (conf.environments[prop] for prop in props)...
     else
       conf
 
