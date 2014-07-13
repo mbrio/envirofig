@@ -184,11 +184,11 @@ case Envirofig uses a case-insensitive property search on the configuration
 object.</p><pre><code class="lang-coffee"># Example CSON config file
 serverPort: 3000
 environments:
-development:
-  serverPort: 8080
-  debug: true
-production:
-  serverPort: 80
+  development:
+    serverPort: 8080
+    debug: true
+  production:
+    serverPort: 80
 </code></pre><p>For information pertaining to configuration files see
 <a href="https://github.com/awnist/confurg">Confurg</a>.</p><pre><code class="lang-coffee"># In this example we assume the environment has been set to *development*
 # and we are using the config file above
@@ -241,7 +241,7 @@ getEnvironment: A <a href='https://developer.mozilla.org/en-US/docs/JavaScript/R
     </div>
     <div id='footer'>
   Generated on
-  Sat Jul 12 2014 21:42:57 GMT-0400 (EDT)
+  Sat Jul 12 2014 21:47:41 GMT-0400 (EDT)
   by
   <a href='https://github.com/gjtorikian/biscotto' title='TomDoc-CoffeeScript API documentation generator'>Biscotto</a>
   v2.1.4
