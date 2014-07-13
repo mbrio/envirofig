@@ -1,47 +1,51 @@
 confurg = require 'confurg'
 _ = require 'lodash'
 
-# Public: Coffeescript and Javascript configuration loader with knowledge of
-# it's environment
+# Public: Coffeescript and Javascript configuration loader with support for
+# environment based overrides.
 class Envirofig
-  # Public: Initializes [confurg](https://github.com/awnist/confurg) with an
-  # environmental parameter then looks at the resulting configuration {Object}
-  # to determine if environmental configurations have been specified, if one
-  # is found matching the specified environment then it's values will be merged
-  # in.
+  # Public: Initializes [Confurg](https://github.com/awnist/confurg), once
+  # complete it determines the requested application environment and merges any
+  # overrides.
   #
-  # In order to determine the environment name to use envirofig first looks
-  # at the `defaults` argument for a property `environment`, if it does not
-  # exist it then looks at `process.env.NODE_ENV`, if it does not exist it
-  # defaults to the *development* environment. Before searching for environment
-  # overrides it lower-cases the environment name.
+  # In order to determine the requested application environment Envirofig first
+  # looks at the supplied `defaults` argument for a property named
+  # `environment`; if not found, it looks at `process.env.NODE_ENV`; if the
+  # global `NODE_ENV` variable is not set it uses the default *development*
+  # environment.
   #
   # In order to find an environment override within the configuration {Object}
-  # envirofig looks within the `environments` property for a property that
-  # matches the specified environment.
+  # Envirofig looks within the `environments` property for a child property that
+  # matches the specified environment name. Name matching is done utilizing a
+  # a glob.
   #
   # ```coffee
   # # Example CSON config file
   # serverPort: 3000
   # environments:
+  #   development:
+  #     serverPort: 8080
+  #     debug: true
   #   production:
   #     serverPort: 80
   # ```
   #
   # For information pertaining to configuration files see
-  # [confurg](https://github.com/awnist/confurg).
+  # [Confurg](https://github.com/awnist/confurg).
   #
-  # config - An {Object} containing a configuration for confurg, see
-  #          [confurg](https://github.com/awnist/confurg)
-  # defaults - An {Object} containing defaults for confurg, see
-  #            [confurg](https://github.com/awnist/confurg)
+  # config - An {Object} containing a configuration for Confurg, see
+  #          [Confurg](https://github.com/awnist/confurg)
+  # defaults - An {Object} containing defaults for Confurg, see
+  #            [Confurg](https://github.com/awnist/confurg)
   #
   # ```coffee
   # # In this example we assume the environment has been set to *development*
   # # and we are using the config file above
   # config = require('envirofig').init 'project-name'
   # console.log config.serverPort
-  # # => 3000
+  # # => 8080
+  # console.log config.debug
+  # # => true
   # ```
   #
   # ```coffee
@@ -50,9 +54,11 @@ class Envirofig
   # config = require('envirofig').init 'project-name'
   # console.log config.serverPort
   # # => 80
+  # console.log config.debug
+  # # => undefined
   # ```
   #
-  # Returns an {Object} containing the values from the merged confurg file with
+  # Returns an {Object} containing the values from the merged Confurg file with
   # the addition of the following key:
   #   getEnvironment: A {Function} that returns the determined environment name
   init: (config = {}, defaults = {}) ->

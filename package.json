@@ -7,19 +7,20 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "coffee-script": "^1.7.1",
     "confurg": "^1.3.1",
     "lodash": "^2.4.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
+    "coffee-script": "^1.7.1",
     "gulp": "^3.8.5",
     "gulp-biscotto": "0.0.6",
     "gulp-coffee": "^2.0.1",
     "gulp-coffeelint": "^0.3.3",
     "gulp-istanbul": "^0.2.0",
     "gulp-mocha": "^0.4.1",
-    "gulp-util": "^2.2.19"
+    "gulp-util": "^2.2.19",
+    "sinon": "^1.10.3"
   },
   "scripts": {
     "test": "./node_modules/.bin/gulp test",
