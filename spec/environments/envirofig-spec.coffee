@@ -8,6 +8,7 @@ describe 'Envirofig', ->
     context 'when no namespace is passed', ->
       it 'should throw an error', ->
         expect(-> Envirofig.init()).to.throw()
+        expect(false).to.be.true
 
     context 'when no environment is specified', ->
       it 'should default to development environment', ->
