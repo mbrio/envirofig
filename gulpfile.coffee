@@ -11,8 +11,10 @@ srcFiles = ['./src/**/*.coffee']
 libFiles = ['./lib/**/*.js']
 
 gulp.task 'clean-build', ->
-  gulp.src libFiles
+  gulp.src './lib/*'
     .pipe clean { force: true }
+
+gulp.task 'clean', ['clean-build']
 
 gulp.task 'lint', ->
   gulp.src srcFiles.concat ['./*.coffee', './spec/**/*.coffee']
