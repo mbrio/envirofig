@@ -21,10 +21,12 @@ gulp.task 'test', ['lint', 'build'], (cb) ->
     .on 'finish', ->
       gulp.src ['./spec/**/*-spec.coffee']
         .pipe mocha({
-          reporter: 'spec',
+          reporter: 'spec'
           compilers: 'coffee:coffee-script'
+          bail: true
         })
         .on 'error', -> @emit 'end'
+        .pipe istanbul.writeReports()
         .on 'end', cb
 
   return
