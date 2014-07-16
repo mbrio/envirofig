@@ -4,7 +4,7 @@
 
 [![NPM Status](https://nodei.co/npm/envirofig.png?downloads=true)](https://npmjs.org/package/envirofig)
 
-Coffeescript and Javascript configuration loader with knowledge of it's
+Coffeescript and Javascript configuration loader with knowledge of its
 environment
 
 ## Installation
