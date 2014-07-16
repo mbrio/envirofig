@@ -1,6 +1,6 @@
 {
   "name": "envirofig",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Coffeescript and Javascript configuration loader with knowledge of its environment",
   "main": "lib/envirofig.js",
   "engines": {
