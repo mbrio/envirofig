@@ -1,6 +1,6 @@
 {
   "name": "envirofig",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Coffeescript and Javascript configuration loader with knowledge of its environment",
   "main": "lib/envirofig.js",
   "engines": {
@@ -8,20 +8,20 @@
   },
   "dependencies": {
     "confurg": "^1.3.1",
-    "lodash": "^2.4.1",
-    "minimatch": "^0.4.0"
+    "lodash": "^4.6.1",
+    "minimatch": "^3.0.0"
   },
   "devDependencies": {
-    "chai": "^1.9.1",
+    "chai": "^3.5.0",
     "coffee-script": "^1.7.1",
     "gulp": "^3.8.5",
-    "gulp-biscotto": "0.0.6",
+    "gulp-biscotto": "0.0.8",
     "gulp-clean": "^0.3.1",
     "gulp-coffee": "^2.0.1",
-    "gulp-coffeelint": "^0.3.3",
-    "gulp-istanbul": "^0.2.0",
-    "gulp-mocha": "^0.4.1",
-    "gulp-util": "^2.2.19",
+    "gulp-coffeelint": "^0.6.0",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.2.0",
+    "gulp-util": "^3.0.7",
     "sinon": "^1.10.3"
   },
   "scripts": {
